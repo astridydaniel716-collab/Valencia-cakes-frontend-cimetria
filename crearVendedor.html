@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <title>Crear Vendedor</title>
+    <link rel="icon" type="icon"href="./imagenes/iconovalenciacakes.ico">
+    <link rel="stylesheet"href="./css/estilo.css">
+    <link rel="stylesheet" href="./css/crearVendedor.css">
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="form-wrapper">
+
+        <div class="form-box">
+
+            <!-- CREAR VENDEDOR -->
+
+            <h2>Crear Vendedor</h2>
+
+            <input type="text" id="identificacion" placeholder="Identificación">
+
+            <input type="text" id="nombres" placeholder="Nombres">
+
+            <input type="text" id="telefono" placeholder="Teléfono">
+
+            <input type="email" id="correo" placeholder="Correo">
+
+            <input type="password" id="contrasena" placeholder="Contraseña">
+
+            <button onclick="crearVendedor()"> Crear Vendedor </button> <hr>
+
+            <!-- CAMBIAR ROL -->
+
+            <h2>Cambiar Rol Usuario</h2>
+
+            <input type="text" id="identificacionRol" placeholder="Identificación Usuario"> <select id="rol">
+
+                <option value="cliente"> Cliente </option>
+
+                <option value="vendedor"> Vendedor </option>
+
+                <option value="admin"> Admin </option>
+
+            </select>
+
+            <button onclick="cambiarRol()"> Cambiar Rol </button> 
+            
+        </div>
+
+    </div>
+
+</div>
+
+<script src="./js/crearVendedor.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,123 @@
+.container {
+
+    width: 100%;
+    max-width: 560px;
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+
+/* tarjeta */
+.form-wrapper {
+
+    background: #ffffff;
+    padding: 35px;
+    border-radius: 18px;
+    box-shadow:
+        0 12px 30px rgba(0,0,0,0.12);
+        margin-bottom: 30px;
+}
+
+/* TITULOS */
+
+.form-box h2 {
+
+    text-align: center;
+    color: #B899C8;
+    margin-bottom: 20px;
+    font-size: 28px;
+}
+
+/*    INPUTS Y SELECT */
+
+.form-box input,
+.form-box select {
+
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 1px solid #F6DE86;
+    border-radius: 10px;
+    outline: none;
+    transition: 0.3s;
+    background: #fffaf5;
+    font-size: 15px;
+}
+
+/* FOCUS */
+
+.form-box input:focus,
+.form-box select:focus {
+
+    border-color: #B899C8;
+    box-shadow:
+        0 0 6px rgba(184,153,200,0.4);
+}
+
+/*    BOTONES  */
+
+.form-box button {
+
+    width: 100%;
+    padding: 12px;
+    background: #B899C8;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.3s;
+    margin-bottom: 12px;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+/* HOVER */
+
+.form-box button:hover {
+
+    background: #a07bb8;
+    transform: translateY(-1px);
+}
+
+/*    LINEA SEPARADORA */
+
+.form-box hr {
+
+    border: none;
+    height: 1px;
+    background: #F6DE86;
+    margin: 25px 0;
+}
+
+/*    SELECT */
+
+.form-box select {
+
+    cursor: pointer;
+}
+
+/*    RESPONSIVE  */
+
+@media (max-width: 700px) {
+
+    .container {
+
+        max-width: 95%;
+    }
+
+    .form-wrapper {
+
+        padding: 25px;
+    }
+
+    .form-box h2 {
+
+        font-size: 24px;
+    }
+}
+
+body {
+
+    align-items: flex-start !important;
+    overflow-y: auto;
+    
+}

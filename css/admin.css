@@ -1,0 +1,425 @@
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: #f7f7f7;
+}
+
+.dashboard {
+    display: flex;
+    height: 100vh;
+    
+}
+
+/* MENU IZQUIERDO */
+.logo-sidebar {
+    width: 250px;
+    background: #e8d2f3;
+    color: rgb(5, 5, 5);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    font-family: 'Great Vibes';
+    
+}
+
+.logo-sidebar h2 {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.logo-sidebar button {
+    padding: 12px;
+    border: none;
+    cursor: pointer;
+    border-radius: 8px;
+    background: white;
+    font-weight: bold;
+}
+
+.logo-sidebar button:hover {
+    background: #a37abf;
+    transform: translateY(-1px);
+}
+
+/* CONTENIDO */
+.contenido {
+    flex: 1;
+    padding: 30px;
+    background: white;
+}
+
+/* ==========================
+   BOTONES DEL PANEL USUARIOS
+========================== */
+#panel-contenido button {
+    background: #B899C8;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    margin: 5px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+#panel-contenido button:hover {
+    background: #a37abf;
+}
+
+
+/* ==========================
+   BOTONES DE ACCIÓN
+========================== */
+.btn-accion {
+    padding: 6px 10px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 13px;
+}
+
+.btn-editar {
+    background: #F6DE86;
+    color: #333;
+}
+
+.btn-eliminar {
+    background: #ff6b6b;
+    color: white;
+}
+
+.btn-editar:hover {
+    background: #e7cd67;
+}
+
+.btn-eliminar:hover {
+    background: #e24d4d;
+}
+
+/* HEADER USUARIOS */
+.header-usuarios{
+    display:flex;
+    gap:10px;
+    margin-bottom:20px;
+}
+
+/* SELECT */
+.formulario select{
+    width:100%;
+    padding:12px;
+    margin-bottom:15px;
+    border-radius:10px;
+    border:1px solid #ddd;
+    outline:none;
+}
+
+.formulario select:focus{
+    border-color:#B899C8;
+    box-shadow:0 0 5px rgba(184,153,200,0.4);
+}
+/* =========================
+RESET
+========================= */
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI', sans-serif;
+}
+
+
+/* =========================
+CONTENEDOR GENERAL
+========================= */
+.usuarios-container{
+    width:100%;
+}
+
+
+/* =========================
+TÍTULO
+========================= */
+#titulo-seccion{
+    margin-bottom:25px;
+    color:#B899C8;
+}
+
+
+/* =========================
+BOTONES FILTRO
+========================= */
+.filtros{
+    display:flex;
+    gap:15px;
+    margin-bottom:30px;
+}
+
+.filtros button{
+
+    background:#B899C8;
+    color:white;
+    border:none;
+    padding:12px 22px;
+    border-radius:12px;
+    cursor:pointer;
+    font-weight:bold;
+    transition:0.3s;
+
+}
+
+.filtros button:hover{
+
+    background:#a27bbb;
+    transform:translateY(-2px);
+
+}
+
+
+/* =========================
+FORMULARIO
+========================= */
+.formulario{
+
+    background:white;
+    border:2px solid #F6DE86;
+    border-radius:18px;
+    padding:25px;
+    margin-bottom:30px;
+
+    box-shadow:
+    0 8px 20px rgba(0,0,0,0.08);
+
+}
+
+.formulario h2{
+
+    color:#B899C8;
+    margin-bottom:25px;
+    font-size:28px;
+
+}
+
+
+/* INPUTS */
+.formulario input,
+.formulario select{
+
+    width:100%;
+    padding:14px;
+    margin-bottom:18px;
+
+    border-radius:12px;
+    border:1px solid #ddd;
+
+    outline:none;
+
+    font-size:15px;
+
+    transition:0.3s;
+
+}
+
+.formulario input:focus,
+.formulario select:focus{
+
+    border-color:#B899C8;
+
+    box-shadow:
+    0 0 8px rgba(184,153,200,0.3);
+
+}
+
+
+/* BOTONES FORM */
+.botones-form{
+
+    display:flex;
+    gap:15px;
+    margin-top:10px;
+
+}
+
+.botones-form button{
+
+    border:none;
+    padding:12px 22px;
+    border-radius:12px;
+    cursor:pointer;
+    font-weight:bold;
+    transition:0.3s;
+
+}
+
+
+/* GUARDAR */
+#btnGuardarUsuario{
+
+    background:#B899C8;
+    color:white;
+
+}
+
+#btnGuardarUsuario:hover{
+
+    background:#a27bbb;
+    transform:translateY(-2px);
+
+}
+
+
+/* CANCELAR */
+.cancelar{
+
+    background:#ddd;
+    color:#444;
+
+}
+
+.cancelar:hover{
+
+    background:#bbb;
+
+}
+
+
+/* =========================
+TABLA
+========================= */
+.tabla{
+
+    width:100%;
+    border-collapse:collapse;
+
+    background:white;
+
+    border-radius:20px;
+    overflow:hidden;
+
+    box-shadow:
+    0 8px 20px rgba(0,0,0,0.08);
+
+}
+
+
+/* HEADER TABLA */
+.tabla th{
+
+    background:#B899C8;
+    color:white;
+
+    padding:16px;
+
+    text-align:center;
+
+    font-size:15px;
+
+}
+
+
+/* CELDAS */
+.tabla td{
+
+    padding:16px;
+    text-align:center;
+    border-bottom:1px solid #eee;
+
+}
+
+
+/* HOVER */
+.tabla tr:hover{
+
+    background:#fff8fc;
+
+}
+
+
+/* =========================
+ACCIONES
+========================= */
+.acciones{
+
+    display:flex;
+    justify-content:center;
+    gap:12px;
+
+}
+
+
+/* BOTONES */
+.btn-editar,
+.btn-eliminar{
+
+    width:42px;
+    height:42px;
+
+    border:none;
+    border-radius:50%;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    cursor:pointer;
+
+    font-size:18px;
+
+    transition:0.3s;
+
+}
+
+
+/* EDITAR */
+.btn-editar{
+
+    background:#F6DE86;
+    color:#444;
+
+}
+
+.btn-editar:hover{
+
+    background:#e4cb6c;
+    transform:scale(1.1);
+
+}
+
+
+/* ELIMINAR */
+.btn-eliminar{
+
+    background:#ff6b6b;
+    color:white;
+
+}
+
+.btn-eliminar:hover{
+
+    background:#e04949;
+    transform:scale(1.1);
+
+}
+
+
+/* =========================
+OCULTAR
+========================= */
+.hidden{
+    display:none;
+}
+
+/* BOTÓN CREAR */
+.filtros button:last-child{
+
+    background:#F6DE86;
+    color:#333;
+
+}
+
+.filtros button:last-child:hover{
+
+    background:#e4cb6c;
+
+}

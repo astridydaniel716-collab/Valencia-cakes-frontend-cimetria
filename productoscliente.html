@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Productos | Valencia Cake's</title>
+
+    <link rel="icon" type="icon" href="./imagenes/iconovalenciacakes.ico">
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./css/productos.css">
+
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <header class="navbar">
+
+        <img src="./imagenes/logo-removebg-preview.png"
+             alt="Logo Valencia Cakes"
+             class="logo-img">
+
+        <nav>
+
+            <a href="login.html"
+               class="btn-login">
+                Iniciar sesión
+            </a>
+
+            <a href="login.html?register=true"
+               class="btn-register">
+                Registrarse
+            </a>
+
+            <a href="index.html"
+               class="btn-inicio">
+                Volver al inicio
+            </a>
+
+            <!-- BOTÓN CARRITO -->
+            <button id="btn-carrito"
+                    class="btn-carrito">
+
+                🛒
+                <span id="contador-carrito">0</span>
+
+            </button>
+
+            <!-- CERRAR SESIÓN -->
+            <button id="cerrar-sesion"
+                    class="btn-cerrar">
+
+                Cerrar sesión
+
+            </button>
+
+        </nav>
+
+    </header>
+
+    <!-- MAIN -->
+    <main>
+
+        <h1>Nuestros Productos</h1>
+
+        <div class="contenedor-cards" id="contenedor-productos">
+
+</div>
+
+    </main>
+
+    <!-- PANEL CARRITO -->
+    <aside id="carrito"
+           class="carrito">
+
+        <!-- FLECHA CERRAR -->
+        <button id="btn-cerrar-carrito"
+                class="btn-cerrar-carrito">
+
+            ←
+
+        </button>
+
+        <h2>Carrito</h2>
+
+        <div id="lista-carrito"></div>
+
+        <h3>
+            Total:
+            $<span id="total">0</span>
+        </h3>
+
+        <button id="vaciar-carrito"
+                class="btn-vaciar">
+
+            Vaciar carrito
+
+        </button>
+
+        <button onclick="enviarPedido()"
+                class="btn-vaciar">
+
+            Finalizar compra
+
+        </button>
+
+    </aside>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+
+        <p>© 2026 Valencia Cake´s</p>
+
+    </footer>
+
+    <!-- JS -->
+    <script src="./js/carrito.js"></script>
+
+</body>
+
+</html>

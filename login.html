@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valencia Cake´s</title>
+
+    <link rel="icon" type="icon" href="./imagenes/iconovalenciacakes.ico">
+    <link rel="stylesheet" href="./css/estilo.css">
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="form-wrapper">
+
+            <!-- LOGIN -->
+            <div id="login-box" class="form-box">
+                <h2>Iniciar Sesión</h2>
+
+                <form id="login-form">
+                    <input type="correo" id="login-correo" placeholder="Correo" required>
+                    <input type="password" id="login-pass" placeholder="Contraseña" required>
+                    <button type="submit">Ingresar</button>
+                </form>
+
+                <p>
+                    ¿No tienes cuenta?
+                    <a href="#" id="go-register">Regístrate aquí</a>
+                </p>
+            </div>
+
+            <!-- REGISTER -->
+            <div id="register-box" class="form-box hidden">
+                <h2>Crear Cuenta</h2>
+
+                <form id="register-form">
+                    <input type="number" id="reg-identificacion" placeholder="Identificación" required>
+                    <input type="text" id="reg-nombres" placeholder="Nombres" required>
+                    <input type="number" id="reg-telefono" placeholder="Teléfono" required>
+                    <input type="correo" id="reg-correo" placeholder="Correo" required>
+                    <input type="password" id="reg-contrasena" placeholder="Contraseña" required>
+
+                    <button type="submit" class="btn-reg">Registrarme</button>
+                </form>
+
+                <p>
+                    ¿Ya tienes cuenta?
+                    <a href="#" id="go-login">Inicia sesión</a>
+                </p>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="./js/main.js" type="module"></script>
+</body>
+</html>

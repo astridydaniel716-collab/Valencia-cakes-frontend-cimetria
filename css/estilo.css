@@ -1,0 +1,92 @@
+/* RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+/* FONDO */
+body {
+    background: linear-gradient(rgba(255,255,255,0.2), rgba(255,255,255,0.2)), url('../imagenes/fondo.jpg') center/cover repeat;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* CONTENEDOR */
+.container {
+    width: 100%;
+    max-width: 400px;
+}
+
+/* TARJETA */
+.form-wrapper {
+    background: #ffffff;
+    padding: 40px;
+    border-radius: 18px;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.12);
+}
+
+/* TITULO */
+.form-box h2 {
+    text-align: center;
+    color: #B899C8;
+    margin-bottom: 25px;
+}
+
+/* INPUTS */
+.form-box input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 1px solid #F6DE86;
+    border-radius: 10px;
+    outline: none;
+    transition: 0.3s;
+    background: #fffaf5;
+}
+
+.form-box input:focus {
+    border-color: #B899C8;
+    box-shadow: 0 0 6px rgba(184,153,200,0.4);
+}
+
+/* BOTONES */
+.form-box button {
+    width: 100%;
+    padding: 12px;
+    background: #B899C8;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.form-box button:hover {
+    background: #a07bb8;
+}
+
+/* TEXTO */
+.form-box p {
+    text-align: center;
+    margin-top: 15px;
+    color: #555;
+}
+
+.form-box a {
+    color: #F9A8C9;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.form-box a:hover {
+    text-decoration: underline;
+}
+
+/* OCULTO */
+.hidden {
+    display: none;
+}

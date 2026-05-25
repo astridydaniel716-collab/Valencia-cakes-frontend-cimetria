@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Productos</title>
+    <link rel="icon" type="icon" href="./imagenes/iconovalenciacakes.ico">
+    <link rel="stylesheet" href="./css/gestionproductos.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+</head>
+<body>
+
+    <div class="contenedor">
+
+        <div class="header">
+            <h1>Gestión de Productos</h1>
+
+            <button id="btnNuevo">
+                + Nuevo Producto
+            </button>
+        </div>
+
+        <!-- FORMULARIO -->
+        <div class="formulario hidden" id="formulario">
+
+            <h2 id="tituloForm">Crear Producto</h2>
+
+            <input type="hidden" id="idproducto">
+            <input type="text" id="codigo" placeholder="Código">
+            <input type="text" id="nombre" placeholder="Nombre">
+            <input type="text" id="descripcion" placeholder="Descripción">
+            <input type="number" id="porciones" placeholder="Porciones">
+            <input type="number" id="precio" placeholder="Precio">
+
+            <div class="botones-form">
+                <button id="btnGuardar">
+                    Guardar
+                </button>
+
+                <button id="btnCancelar" class="cancelar">
+                    Cancelar
+                </button>
+            </div>
+
+        </div>
+
+        <!-- TABLA -->
+        <div class="tabla-contenedor">
+
+            <table>
+
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Código</th>
+                        <th>Nombre</th>
+                        <th>Descripción</th>
+                        <th>Porciones</th>
+                        <th>Precio</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+
+                <tbody id="tablaProductos">
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+    <script src="./js/gestionproductos.js"></script>
+
+</body>
+</html>
