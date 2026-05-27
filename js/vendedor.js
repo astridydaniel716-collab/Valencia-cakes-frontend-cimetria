@@ -20,8 +20,8 @@ window.addEventListener('DOMContentLoaded', () => {
 });
 
 //  navegación
-function irFacturacion() {
-    window.location.href = '../facturacion.html';
+function irPedidos() {
+    window.location.href = '../pedidos.html';
 }
 
 function cerrarSesion() {

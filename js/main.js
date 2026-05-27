@@ -132,7 +132,7 @@ document.getElementById('login-form')
             ) {
 
                 window.location.href =
-                    'facturacion.html';
+                    'pedidos.html';
 
             }
 

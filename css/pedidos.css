@@ -1,0 +1,401 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background:
+    linear-gradient(rgba(255,255,255,0.2),rgba(255,255,255,0.2)),url('../imagenes/fondo.jpg')center/cover repeat;
+    display: flex;
+    min-height: 100vh;
+}
+
+/* =========================
+CONTENT
+========================= */
+
+.main-content {
+    flex: 1;
+    padding: 30px;
+}
+
+.top-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.top-content h1 {
+    color: #222;
+    font-size: 30px;
+    margin-bottom: 5px;
+    
+}
+
+.top-content p {
+    color: #777;
+}
+
+
+/* =========================
+BUTTONS
+========================= */
+
+.btn-primary,
+.btn-secondary {
+    border: none;
+    padding: 12px 18px;
+    border-radius: 12px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: .3s;
+}
+
+.btn-primary {
+    background: #B899C8;
+    color: white;
+}
+
+.btn-primary:hover {
+    opacity: .9;
+    transform: translateX(-5px);
+}
+
+.btn-secondary {
+    background: #ececec;
+    color: #333;
+}
+
+.btn-secondary:hover {
+    background: #ddd;
+}
+
+
+/* =========================
+TABLE
+========================= */
+
+.table-container {
+    background: white;
+    border-radius: 18px;
+    padding: 20px;
+    overflow-x: auto;
+    box-shadow: 0 4px 20px rgba(0,0,0,.05);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+thead {
+    background: #fafafa;
+}
+
+th,
+td {
+    padding: 16px;
+    text-align: left;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+th {
+    color: #555;
+}
+
+td {
+    color: #333;
+}
+
+
+/* =========================
+ESTADOS
+========================= */
+
+.estado {
+    padding: 8px 14px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.estado.pendiente {
+    background: #fff3cd;
+    color: #856404;
+}
+
+.estado.preparacion {
+    background: #d1ecf1;
+    color: #0c5460;
+}
+
+.estado.entregado {
+    background: #d4edda;
+    color: #155724;
+}
+
+.estado.cancelado {
+    background: #f8d7da;
+    color: #721c24;
+}
+
+
+/* =========================
+ACCIONES
+========================= */
+
+.acciones {
+    display: flex;
+    gap: 10px;
+}
+
+.btn-table {
+    width: 38px;
+    height: 38px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.btn-view {
+    background: #e3f2fd;
+    color: #1565c0;
+}
+
+.btn-edit {
+    background: #fff3cd;
+    color: #856404;
+}
+
+.btn-delete {
+    background: #fdeaea;
+    color: #c62828;
+}
+
+.btn-table:hover {
+    transform: scale(1.05);
+}
+
+
+/* =========================
+MODAL
+========================= */
+
+.modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.45);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+}
+
+.modal.active {
+    display: flex;
+}
+
+.modal-content {
+    background: white;
+    width: 95%;
+    max-width: 600px;
+    border-radius: 20px;
+    padding: 25px;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.modal-lg {
+    max-width: 1000px;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.modal-header h2 {
+    color: #222;
+}
+
+.btn-close {
+    border: none;
+    background: transparent;
+    font-size: 22px;
+    cursor: pointer;
+}
+
+
+/* =========================
+FORM
+========================= */
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+    gap: 10px;
+}
+
+.form-group label {
+    font-weight: 600;
+    color: #444;
+}
+
+.form-group input,
+.form-group select {
+    padding: 13px;
+    border-radius: 12px;
+    border: 1px solid #ddd;
+    outline: none;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    border-color: #ff4d6d;
+}
+
+.cliente-row {
+    display: flex;
+    gap: 10px;
+}
+
+.cliente-row select {
+    flex: 1;
+}
+
+
+/* =========================
+PRODUCTOS
+========================= */
+
+.productos-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.productos-header h3 {
+    color: #333;
+}
+
+.producto-item {
+    display: grid;
+    grid-template-columns: 2fr 120px 150px 60px;
+    gap: 15px;
+    margin-bottom: 15px;
+    align-items: center;
+}
+
+.producto-item select,
+.producto-item input {
+    padding: 12px;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+}
+
+
+/* =========================
+TOTAL
+========================= */
+
+.total-container {
+    margin-top: 30px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.total-container h2 {
+    color: #ff4d6d;
+}
+
+
+/* =========================
+FOOTER MODAL
+========================= */
+
+.modal-footer {
+    margin-top: 30px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+}
+
+
+/* =========================
+DETALLE PEDIDO
+========================= */
+
+.detalle-info {
+    margin-bottom: 25px;
+}
+
+.detalle-info p {
+    margin-bottom: 10px;
+    color: #444;
+    font-size: 15px;
+}
+
+#detallePedidoContainer table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#detallePedidoContainer th,
+#detallePedidoContainer td {
+    border-bottom: 1px solid #eee;
+    padding: 14px;
+}
+
+.detalle-info {
+    background: #fff3f6;
+    padding: 15px;
+    border-radius: 12px;
+    margin-bottom: 15px;
+}
+
+.detalle-info p {
+    margin: 5px 0;
+    color: #333;
+} 
+
+/* =========================
+RESPONSIVE
+========================= */
+
+@media(max-width: 900px) {
+
+    .sidebar {
+        display: none;
+    }
+
+    .main-content {
+        width: 100%;
+    }
+
+}
+
+@media(max-width: 768px) {
+
+    .top-content {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    .producto-item {
+        grid-template-columns: 1fr;
+    }
+
+    .cliente-row {
+        flex-direction: column;
+    }
+
+}

@@ -51,12 +51,12 @@ function mostrarSeccion(seccion) {
         `;
     }
 
-    else if (seccion === 'facturacion') {
+    else if (seccion === 'pedidos') {
 
-        titulo.textContent = "Facturación";
+        titulo.textContent = "Sistema de Pedidos";
 
         panel.innerHTML = `
-            <iframe src="../facturacion.html"
+            <iframe src="../pedidos.html"
                 style="width:100%; height:80vh; border:none;"></iframe>
         `;
     }
