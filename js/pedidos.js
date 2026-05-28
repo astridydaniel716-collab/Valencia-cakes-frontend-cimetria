@@ -1,4 +1,6 @@
-const API_URL = "http://localhost:3330/app/pedidos";
+const API_PEDIDOS = "http://localhost:3330/app/pedidos";
+const API_CLIENTES = "http://localhost:3330/app/clientes";
+const API_PRODUCTOS = "http://localhost:3330/app/productos";
 
 const tbodyPedidos = document.getElementById("tbodyPedidos");
 
@@ -75,7 +77,7 @@ async function cargarPedidos() {
 
     try {
 
-        const response = await fetch(`${API_URL}/pedidos`);
+        const response = await fetch(`${API_PEDIDOS}/pedidos`);
 
         const pedidos = await response.json();
 
@@ -142,8 +144,6 @@ async function cargarPedidos() {
     }
 
 }
-
-
 // ==============================
 // CARGAR PRODUCTOS
 // ==============================
@@ -152,18 +152,28 @@ async function cargarProductos() {
 
     try {
 
-        const response = await fetch(`${API_URL}/productos`);
+        const response = await fetch(
+            "http://localhost:3330/app/productos/todos"
+        );
 
-        productosDB = await response.json();
+        const res = await response.json();
+
+        console.log("RESPUESTA PRODUCTOS:", res);
+
+        productosDB = res.data || [];
+
+        console.log("PRODUCTOS DB:", productosDB);
 
     } catch (error) {
 
-        console.error(error);
+        console.error(
+            "ERROR CARGANDO PRODUCTOS:",
+            error
+        );
 
     }
 
 }
-
 
 // ==============================
 // CARGAR CLIENTES
@@ -173,25 +183,43 @@ async function cargarClientes() {
 
     try {
 
-        const response = await fetch(`${API_URL}/clientes`);
+        const response = await fetch(
+            "http://localhost:3330/app/usuarios/clientes"
+        );
 
-        const res = await response.json(); clientesDB = res.data || res;
+        const res = await response.json();
 
+        console.log("CLIENTES:", res);
+
+        clientesDB = res.data || [];
+
+        // LIMPIAR SELECT
         clienteSelect.innerHTML = "";
 
-        const optionDefault = document.createElement("option");
+        // OPTION DEFAULT
+        const optionDefault =
+            document.createElement("option");
 
         optionDefault.value = "";
-        optionDefault.textContent = "Seleccione un cliente";
+
+        optionDefault.textContent =
+            "Seleccione un cliente";
 
         clienteSelect.appendChild(optionDefault);
 
+        // RECORRER CLIENTES
         clientesDB.forEach(cliente => {
 
-            const option = document.createElement("option");
+            console.log(cliente);
 
-            option.value = cliente.id;
-            option.textContent = cliente.nombre;
+            const option =
+                document.createElement("option");
+
+            option.value =
+                cliente.idusuario;
+
+            option.textContent =
+                cliente.nombres;
 
             clienteSelect.appendChild(option);
 
@@ -199,13 +227,14 @@ async function cargarClientes() {
 
     } catch (error) {
 
-        console.error(error);
+        console.error(
+            "ERROR CARGANDO CLIENTES:",
+            error
+        );
 
     }
 
 }
-
-
 // ==============================
 // MODAL PEDIDO
 // ==============================
@@ -219,7 +248,7 @@ function abrirModalNuevoPedido() {
 
     formPedido.reset();
 
-    document.getElementById("pedidoId").value = "";
+    document.getElementById("idpedido").value = "";
 
     detallesPedido = [];
 
@@ -276,6 +305,10 @@ function renderProductos() {
 
         row.classList.add("producto-item");
 
+        // =========================
+        // SELECT PRODUCTOS
+        // =========================
+
         const selectProducto = document.createElement("select");
 
         const optionDefault = document.createElement("option");
@@ -289,28 +322,56 @@ function renderProductos() {
 
             const option = document.createElement("option");
 
-            option.value = producto.id;
-            option.textContent = producto.nombre;
+            const idProducto =
+                producto.idproducto ||
+                producto.id ||
+                producto.id_producto;
 
-            if (producto.id == detalle.producto_id) {
+            option.value = idProducto;
+
+            option.textContent =
+                producto.nombre ||
+                producto.nombreproducto;
+
+            // SELECCIONAR PRODUCTO
+            if (idProducto == detalle.producto_id) {
+
                 option.selected = true;
+
             }
 
             selectProducto.appendChild(option);
 
         });
 
+        // =========================
+        // CANTIDAD
+        // =========================
+
         const inputCantidad = document.createElement("input");
 
         inputCantidad.type = "number";
+
         inputCantidad.min = 1;
+
         inputCantidad.value = detalle.cantidad;
+
+        // =========================
+        // SUBTOTAL
+        // =========================
 
         const inputSubtotal = document.createElement("input");
 
         inputSubtotal.type = "text";
+
         inputSubtotal.disabled = true;
-        inputSubtotal.value = `$${detalle.subtotal}`;
+
+        inputSubtotal.value =
+            `$${Number(detalle.subtotal).toLocaleString()}`;
+
+        // =========================
+        // BOTON ELIMINAR
+        // =========================
 
         const btnEliminar = document.createElement("button");
 
@@ -320,6 +381,10 @@ function renderProductos() {
 
         btnEliminar.innerHTML =
             '<i class="fa-solid fa-trash"></i>';
+
+        // =========================
+        // EVENTOS
+        // =========================
 
         selectProducto.addEventListener("change", (e) => {
 
@@ -339,9 +404,16 @@ function renderProductos() {
 
         });
 
+        // =========================
+        // APPEND
+        // =========================
+
         row.appendChild(selectProducto);
+
         row.appendChild(inputCantidad);
+
         row.appendChild(inputSubtotal);
+
         row.appendChild(btnEliminar);
 
         contenedorProductos.appendChild(row);
@@ -358,19 +430,20 @@ function renderProductos() {
 function seleccionarProducto(index, idproducto) {
 
     const producto = productosDB.find(
-        p => p.id == idproducto
+        p => p.idproducto == idproducto
     );
 
     if (!producto) return;
 
-    detallesPedido[index].idproducto = idproducto;
+    detallesPedido[index].producto_id =
+        idproducto;
 
-    detallesPedido[index].precio = producto.precio;
+    detallesPedido[index].precio =
+        Number(producto.precio);
 
     actualizarSubtotal(index);
 
 }
-
 
 // ==============================
 // CAMBIAR CANTIDAD
@@ -436,12 +509,28 @@ function eliminarProducto(index) {
 
 }
 
-
 // ==============================
 // GUARDAR PEDIDO
 // ==============================
 
-formPedido.addEventListener("submit", guardarPedido);
+formPedido.addEventListener("submit", async (e) => {
+
+    e.preventDefault();
+
+    const idpedido =
+        document.getElementById("idpedido").value;
+
+    if (idpedido) {
+
+        await guardarEdicionPedido();
+
+    } else {
+
+        await guardarPedido(e);
+
+    }
+
+});
 
 async function guardarPedido(e) {
 
@@ -454,22 +543,59 @@ async function guardarPedido(e) {
 
         const payload = {
 
-            cliente_id: clienteSelect.value,
+            cliente_id:
+                clienteSelect.value,
 
-            estado: estadoSelect.value,
+            estado:
+                estadoSelect.value,
 
-            detalles: detallesPedido
+            fecha_entrega:
+                document.getElementById("fecha_entrega").value,
+
+            hora_entrega:
+                document.getElementById("hora_entrega").value,
+
+            abono:
+                document.getElementById("abono").value || 0,
+
+            metodo_entrega:
+                document.getElementById("metodo_entrega").value,
+
+            direccion:
+                document.getElementById("direccion").value,
+
+            observaciones:
+                document.getElementById("observaciones").value,
+
+            detalles: detallesPedido.map(item => ({
+
+                idproducto:
+                    item.producto_id,
+
+                cantidad:
+                    item.cantidad,
+
+                precio:
+                    item.precio,
+
+                subtotal:
+                    item.subtotal
+
+            }))
 
         };
 
-        let endpoint = `${API_URL}/pedidos`;
+        console.log("PAYLOAD:", payload);
+
+        let endpoint =
+            `${API_PEDIDOS}`;
 
         let method = "POST";
 
         if (idpedido) {
 
             endpoint =
-                `${API_URL}/pedidos/${id}`;
+                `${API_PEDIDOS}/editar/${idpedido}`;
 
             method = "PUT";
 
@@ -487,9 +613,15 @@ async function guardarPedido(e) {
 
         });
 
+        const data = await response.json();
+
+        console.log("RESPUESTA:", data);
+
         if (!response.ok) {
 
-            throw new Error("Error guardando pedido");
+            throw new Error(
+                data.msg || "Error guardando pedido"
+            );
 
         }
 
@@ -502,6 +634,8 @@ async function guardarPedido(e) {
     } catch (error) {
 
         console.error(error);
+
+        alert(error.message);
 
     }
 
@@ -517,7 +651,7 @@ async function editarPedido(idpedido) {
     try {
 
         const response =
-            await fetch(`${API_URL}/${idpedido}`);
+            await fetch(`${API_PEDIDOS}/${idpedido}`);
 
         const data = await response.json();
 
@@ -550,13 +684,79 @@ async function editarPedido(idpedido) {
         document.getElementById("observaciones")
             .value = pedido.observaciones || "";
 
-        modalPedido.classList.add("active");
+// ======================
+// CARGAR DETALLES
+// ======================
 
-    } catch (error) {
+detallesPedido = [];
 
-        console.error(error);
+console.log("DETALLES RAW:", data.detalles);
 
-    }
+if (data.detalles && data.detalles.length > 0) {
+
+    detallesPedido = data.detalles.map(detalle => {
+
+        // BUSCAR PRODUCTO EN LA BD
+       const productoEncontrado = productosDB.find(p => {
+
+        console.log("PRODUCTO BD:", p);
+    console.log("DETALLE:", detalle);
+
+    const nombreProductoBD =
+        (p.nombreproducto || p.nombre || "")
+        .toLowerCase()
+        .trim();
+
+    const nombreDetalle =
+        (detalle.producto || "")
+        .toLowerCase()
+        .trim();
+
+    return nombreProductoBD === nombreDetalle;
+
+});
+
+        console.log(
+            "PRODUCTO ENCONTRADO:",
+            productoEncontrado
+        );
+
+        return {
+
+            producto_id:
+                productoEncontrado?.idproducto ||
+                productoEncontrado?.id ||
+                productoEncontrado?.id_producto ||
+                "",
+
+            cantidad:
+                Number(detalle.cantidad),
+
+            precio:
+                Number(detalle.precio),
+
+            subtotal:
+                Number(detalle.subtotal)
+
+        };
+
+    });
+
+}
+
+console.log("DETALLES PROCESADOS:", detallesPedido);
+
+renderProductos();
+
+actualizarTotal();
+
+modalPedido.classList.add("active");
+
+} catch (error) {
+
+    console.error(error);
+
+}
 
 }
 
@@ -567,7 +767,7 @@ async function guardarEdicionPedido() {
         const idpedido =
             document.getElementById("idpedido").value;
 
-        const pedido = {
+        const payload = {
 
             estado:
                 document.getElementById("estado").value,
@@ -588,39 +788,94 @@ async function guardarEdicionPedido() {
                 document.getElementById("direccion").value,
 
             observaciones:
-                document.getElementById("observaciones").value
+                document.getElementById("observaciones").value,
+
+            detalles: detallesPedido.map(item => {
+
+                // BUSCAR PRODUCTO EN LA BD
+                const productoDB = productosDB.find(
+                    p =>
+                        (p.idproducto || p.id) ==
+                        item.producto_id
+                );
+
+                return {
+
+                    // TU TABLA detalle_pedido
+                    // GUARDA EL NOMBRE
+                    producto:
+                        productoDB?.nombre || "",
+
+                    cantidad:
+                        item.cantidad,
+
+                    precio:
+                        item.precio,
+
+                    subtotal:
+                        item.subtotal
+
+                };
+
+            })
 
         };
 
+        console.log(
+            "EDIT PAYLOAD:",
+            payload
+        );
+
         const response = await fetch(
-            `${API_URL}/editar/${idpedido}`,
+
+            `${API_PEDIDOS}/editar/${idpedido}`,
+
             {
+
                 method: "PUT",
+
                 headers: {
-                    "Content-Type": "application/json"
+                    "Content-Type":
+                        "application/json"
                 },
-                body: JSON.stringify(pedido)
+
+                body:
+                    JSON.stringify(payload)
+
             }
+
         );
 
         const data = await response.json();
 
+        console.log(data);
+
         if (!response.ok) {
-            throw new Error(data.msg);
+
+            throw new Error(
+
+                data.msg ||
+                "Error editando pedido"
+
+            );
+
         }
 
         modalPedido.classList.remove("active");
 
         await cargarPedidos();
 
+        alert("Pedido actualizado");
+
     } catch (error) {
 
         console.error(error);
 
+        alert(error.message);
+
     }
 
 }
-
 
 // ==============================
 // ELIMINAR PEDIDO
@@ -636,7 +891,7 @@ async function eliminarPedido(idpedido) {
     try {
 console.log("ID enviado:", idpedido);
         const response =
-            await fetch(`${API_URL}/eliminar/${idpedido}`, {
+            await fetch(`${API_PEDIDOS}/eliminar/${idpedido}`, {
 
                 method: "DELETE"
 
@@ -674,7 +929,7 @@ async function verDetallePedido(idpedido) {
             return;
         }
 
-        const response = await fetch(`${API_URL}/${idpedido}`);
+        const response = await fetch(`${API_PEDIDOS}/${idpedido}`);
 
         const data = await response.json();
 
@@ -757,17 +1012,25 @@ btnCerrarDetalle.addEventListener("click", () => {
 // MODAL CLIENTE
 // ==============================
 
-btnNuevoCliente.addEventListener("click", () => {
+if (btnNuevoCliente && modalCliente) {
 
-    modalCliente.classList.add("active");
+    btnNuevoCliente.addEventListener("click", () => {
 
-});
+        modalCliente.classList.add("active");
 
-btnCerrarModalCliente.addEventListener("click", () => {
+    });
 
-    modalCliente.classList.remove("active");
+}
 
-});
+if (btnCerrarModalCliente && modalCliente) {
+
+    btnCerrarModalCliente.addEventListener("click", () => {
+
+        modalCliente.classList.remove("active");
+
+    });
+
+}
 
 
 // ==============================
@@ -796,7 +1059,7 @@ async function crearCliente(e) {
         };
 
         const response =
-            await fetch(`${API_URL}/clientes`, {
+            await fetch(`${API_CLIENTES}/clientes`, {
 
                 method: "POST",
 
