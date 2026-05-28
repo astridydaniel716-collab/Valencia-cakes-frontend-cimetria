@@ -521,13 +521,11 @@ formPedido.addEventListener("submit", async (e) => {
         document.getElementById("idpedido").value;
 
     if (idpedido) {
-
-        await guardarEdicionPedido();
-
+    await guardarEdicionPedido();
     } else {
 
-        await guardarPedido(e);
-
+         await guardarPedido(e);
+    
     }
 
 });
@@ -543,7 +541,7 @@ async function guardarPedido(e) {
 
         const payload = {
 
-            cliente_id:
+            idusuario:
                 clienteSelect.value,
 
             estado:
@@ -568,38 +566,31 @@ async function guardarPedido(e) {
                 document.getElementById("observaciones").value,
 
             detalles: detallesPedido.map(item => ({
-
-                idproducto:
-                    item.producto_id,
-
-                cantidad:
-                    item.cantidad,
-
-                precio:
-                    item.precio,
-
-                subtotal:
-                    item.subtotal
-
-            }))
+    producto: productosDB.find(p => p.idproducto == item.producto_id)?.nombre || "",
+    cantidad: item.cantidad,
+    precio: item.precio,
+    subtotal: item.subtotal
+}))
 
         };
 
         console.log("PAYLOAD:", payload);
 
-        let endpoint =
-            `${API_PEDIDOS}`;
+        let endpoint;
+let method = "POST";
 
-        let method = "POST";
+if (idpedido) {
 
-        if (idpedido) {
+    endpoint = `${API_PEDIDOS}/editar/${idpedido}`;
+    method = "PUT";
 
-            endpoint =
-                `${API_PEDIDOS}/editar/${idpedido}`;
+} else {
 
-            method = "PUT";
+    // 👇 ESTE ARCHIVO ES DEL ADMIN → SIEMPRE MANUAL
+    endpoint = `${API_PEDIDOS}/manual`;
+    method = "POST";
 
-        }
+}
 
         const response = await fetch(endpoint, {
 
@@ -1088,7 +1079,6 @@ async function crearCliente(e) {
     }
 
 }
-
 
 // ==============================
 // UTILIDAD FECHA
