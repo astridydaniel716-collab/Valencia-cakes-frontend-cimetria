@@ -59,224 +59,180 @@
         </main>
 
     </div>
+<!-- MODAL PEDIDO -->
+<div class="modal" id="modalPedido">
 
-    <!-- MODAL PEDIDO -->
-    <div class="modal" id="modalPedido">
+    <div class="modal-content modal-lg">
 
-        <div class="modal-content modal-lg">
+        <div class="modal-header">
 
-            <div class="modal-header">
+            <h2 id="tituloModal">Nuevo Pedido</h2>
 
-                <h2 id="tituloModal">
-                    Nuevo Pedido
-                </h2>
+            <button class="btn-close" id="cerrarModal">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
 
-                <button class="btn-close" id="cerrarModal">
-                    <i class="fa-solid fa-xmark"></i>
-                </button>
+        </div>
 
-            </div>
+        <form id="formPedido">
 
-            <form id="formPedido">
+            <!-- ID OCULTO (CORRECTO PARA TU JS) -->
+            <input type="hidden" id="idpedido">
 
-                <input type="hidden" id="pedidoId">
+            <!-- CLIENTE -->
+            <div class="form-group">
 
-                <div class="form-group">
+                <label>Cliente</label>
 
-                    <label>Cliente</label>
+                <div class="cliente-row">
 
-                    <div class="cliente-row">
-
-                        <select id="cliente_id" required>
-                            <option value="">
-                                Seleccione un cliente
-                            </option>
-                        </select>
-
-                        <button type="button"
-                            class="btn-secondary"
-                            id="btnNuevoCliente">
-
-                            <i class="fa-solid fa-user-plus"></i>
-
-                        </button>
-
-                    </div>
-
-                </div>
-
-                <div class="form-group">
-
-                    <label>Estado</label>
-
-                    <select id="estado">
-
-                        <option value="pendiente">
-                            Pendiente
-                        </option>
-
-                        <option value="preparacion">
-                            En preparación
-                        </option>
-
-                        <option value="entregado">
-                            Entregado
-                        </option>
-
-                        <option value="cancelado">
-                            Cancelado
-                        </option>
-
+                    <select id="cliente_id" required>
+                        <option value="">Seleccione un cliente</option>
                     </select>
-
-                </div>
-
-                <!-- PRODUCTOS -->
-                <div class="productos-header">
-
-                    <h3>Productos</h3>
-
-                    <button type="button"
-                        class="btn-primary"
-                        id="btnAgregarProducto">
-
-                        <i class="fa-solid fa-plus"></i>
-                        Agregar Producto
-
-                    </button>
-
-                </div>
-
-                <div id="contenedorProductos">
-                    <!-- JS -->
-                </div>
-
-                <div class="total-container">
-
-                    <h2>
-                        Total:
-                        <span id="totalPedido">$0</span>
-                    </h2>
-
-                </div>
-
-                <div class="modal-footer">
 
                     <button type="button"
                         class="btn-secondary"
-                        id="btnCancelarModal">
-
-                        Cancelar
-
-                    </button>
-
-                    <button type="submit"
-                        class="btn-primary">
-
-                        Guardar Pedido
-
+                        id="btnNuevoCliente">
+                        <i class="fa-solid fa-user-plus"></i>
                     </button>
 
                 </div>
 
-            </form>
+            </div>
 
-        </div>
+            <!-- ESTADO -->
+            <div class="form-group">
 
-    </div>
+                <label>Estado</label>
 
-    <!-- MODAL DETALLE -->
-    <div class="modal" id="modalDetalle">
+                <select id="estado">
+                    <option value="pendiente">Pendiente</option>
+                    <option value="preparacion">En preparación</option>
+                    <option value="entregado">Entregado</option>
+                    <option value="cancelado">Cancelado</option>
+                </select>
 
-        <div class="modal-content modal-lg">
+            </div>
 
-            <div class="modal-header">
+            <!-- FECHA ENTREGA -->
+            <div class="form-group">
 
-                <h2>Detalle Pedido</h2>
+                <label>Fecha de entrega</label>
+                <input type="date" id="fecha_entrega">
+            </div>
 
-                <button class="btn-close"
-                    id="cerrarDetalle">
+            <!-- HORA ENTREGA -->
+            <div class="form-group">
 
-                    <i class="fa-solid fa-xmark"></i>
+                <label>Hora de entrega</label>
+                <input type="time" id="hora_entrega">
+            </div>
+
+            <!-- ABONO -->
+            <div class="form-group">
+
+                <label>Abono</label>
+                <input type="number" id="abono" min="0">
+            </div>
+
+            <!-- METODO ENTREGA -->
+            <div class="form-group">
+
+                <label>Método de entrega</label>
+
+                <select id="metodo_entrega">
+                    <option value="domicilio">Domicilio</option>
+                    <option value="recoger">Recoger en tienda</option>
+                </select>
+
+            </div>
+
+            <!-- DIRECCION -->
+            <div class="form-group">
+
+                <label>Dirección</label>
+                <input type="text" id="direccion">
+            </div>
+
+            <!-- OBSERVACIONES -->
+            <div class="form-group">
+
+                <label>Observaciones</label>
+                <textarea id="observaciones"></textarea>
+            </div>
+
+            <!-- PRODUCTOS -->
+            <div class="productos-header">
+
+                <h3>Productos</h3>
+
+                <button type="button"
+                    class="btn-primary"
+                    id="btnAgregarProducto">
+
+                    <i class="fa-solid fa-plus"></i>
+                    Agregar Producto
 
                 </button>
 
             </div>
 
-            <div id="detallePedidoContainer">
-                <!-- JS -->
+            <div id="contenedorProductos"></div>
+
+            <!-- TOTAL -->
+            <div class="total-container">
+
+                <h2>
+                    Total:
+                    <span id="totalPedido">$0</span>
+                </h2>
+
             </div>
 
-        </div>
+            <!-- BOTONES -->
+            <div class="modal-footer">
 
-    </div>
+                <button type="button"
+                    class="btn-secondary"
+                    id="btnCancelarModal">
+                    Cancelar
+                </button>
 
-    <!-- MODAL NUEVO CLIENTE -->
-    <div class="modal" id="modalCliente">
-
-        <div class="modal-content">
-
-            <div class="modal-header">
-
-                <h2>Nuevo Cliente</h2>
-
-                <button class="btn-close"
-                    id="cerrarModalCliente">
-
-                    <i class="fa-solid fa-xmark"></i>
-
+                <button type="submit"
+                    class="btn-primary">
+                    Guardar Pedido
                 </button>
 
             </div>
 
-            <form id="formCliente">
-
-                <div class="form-group">
-
-                    <label>Nombre</label>
-
-                    <input type="text"
-                        id="clienteNombre"
-                        required>
-
-                </div>
-
-                <div class="form-group">
-
-                    <label>Teléfono</label>
-
-                    <input type="text"
-                        id="clienteTelefono">
-
-                </div>
-
-                <div class="form-group">
-
-                    <label>Correo</label>
-
-                    <input type="email"
-                        id="clienteCorreo">
-
-                </div>
-
-                <div class="modal-footer">
-
-                    <button type="submit"
-                        class="btn-primary">
-
-                        Guardar Cliente
-
-                    </button>
-
-                </div>
-
-            </form>
-
-        </div>
+        </form>
 
     </div>
 
-    <script src="../js/pedidos.js"></script>
+</div>
+<!-- MODAL DETALLE -->
+<div class="modal" id="modalDetalle">
 
+    <div class="modal-content modal-lg">
+
+        <div class="modal-header">
+
+            <h2>Detalle Pedido</h2>
+
+            <button class="btn-close" id="cerrarDetalle">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+        </div>
+
+        <div id="detallePedidoContainer"></div>
+
+    </div>
+
+</div>
+
+<script src="../js/pedidos.js">
+
+</script>
 </body>
 </html>

@@ -517,41 +517,101 @@ async function editarPedido(idpedido) {
     try {
 
         const response =
-            await fetch(`${API_URL}/pedidos/${id}`);
+            await fetch(`${API_URL}/${idpedido}`);
 
-        const pedido = await response.json();
+        const data = await response.json();
+
+        const pedido = data.pedido;
 
         document.getElementById("tituloModal")
             .textContent = "Editar Pedido";
 
         document.getElementById("idpedido")
-            .value = idpedido;
+            .value = pedido.idpedido;
 
-        clienteSelect.value = pedido.cliente_id;
+        document.getElementById("estado")
+            .value = pedido.estado || "";
 
-        estadoSelect.value = pedido.estado;
+        document.getElementById("fecha_entrega")
+            .value = pedido.fecha_entrega || "";
 
-        detallesPedido = pedido.detalles.map(item => {
+        document.getElementById("hora_entrega")
+            .value = pedido.hora_entrega || "";
 
-            return {
+        document.getElementById("abono")
+            .value = pedido.abono || "";
 
-                idproducto: item.idproducto,
+        document.getElementById("metodo_entrega")
+            .value = pedido.metodo_entrega || "";
 
-                cantidad: item.cantidad,
+        document.getElementById("direccion")
+            .value = pedido.direccion || "";
 
-                precio: item.precio,
-
-                subtotal: item.subtotal
-
-            };
-
-        });
-
-        renderProductos();
-
-        actualizarTotal();
+        document.getElementById("observaciones")
+            .value = pedido.observaciones || "";
 
         modalPedido.classList.add("active");
+
+    } catch (error) {
+
+        console.error(error);
+
+    }
+
+}
+
+async function guardarEdicionPedido() {
+
+    try {
+
+        const idpedido =
+            document.getElementById("idpedido").value;
+
+        const pedido = {
+
+            estado:
+                document.getElementById("estado").value,
+
+            fecha_entrega:
+                document.getElementById("fecha_entrega").value,
+
+            hora_entrega:
+                document.getElementById("hora_entrega").value,
+
+            abono:
+                document.getElementById("abono").value,
+
+            metodo_entrega:
+                document.getElementById("metodo_entrega").value,
+
+            direccion:
+                document.getElementById("direccion").value,
+
+            observaciones:
+                document.getElementById("observaciones").value
+
+        };
+
+        const response = await fetch(
+            `${API_URL}/editar/${idpedido}`,
+            {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(pedido)
+            }
+        );
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            throw new Error(data.msg);
+        }
+
+        modalPedido.classList.remove("active");
+
+        await cargarPedidos();
 
     } catch (error) {
 
@@ -574,17 +634,19 @@ async function eliminarPedido(idpedido) {
     if (!confirmar) return;
 
     try {
-
+console.log("ID enviado:", idpedido);
         const response =
-            await fetch(`${API_URL}/pedidos/${id}`, {
+            await fetch(`${API_URL}/eliminar/${idpedido}`, {
 
                 method: "DELETE"
 
             });
 
+            const data = await response.json();
+            console.log(data);
         if (!response.ok) {
 
-            throw new Error("Error eliminando");
+            throw new Error(data.msg);
 
         }
 
